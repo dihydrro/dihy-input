@@ -1,6 +1,11 @@
+.input-tokenfield {
+  max-height: 72px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .input-tokenfield > span {
-  padding: 0px 6px 0px 6px;
-  margin: 4px 4px 4px 4px;
+  padding: 2px 10px 2px 10px;
+  margin: 2px 2px 2px 2px;
   display: inline-block;
 }
 
@@ -14,7 +19,6 @@ span.tokendfield {
 span.tokendfield > span.icon {
   cursor: pointer;
 }
-
 i.fas.fa-times {
   margin-left: 4px;
 }
@@ -27,7 +31,6 @@ i.fas.fa-times {
 .select {
   border: #dcdcdc 1px solid;
   border-radius: 6px;
-  margin: 6px 6px 6px 6px;
   padding: 3px 3px 3px 3px;
 }
 
