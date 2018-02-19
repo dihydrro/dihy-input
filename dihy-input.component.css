@@ -63,6 +63,7 @@ i.fas.fa-times {
 
 .hide-options {
   position: fixed;
+  z-index: 25;
   top: 0;
   left: 0;
   width: 100vw;
