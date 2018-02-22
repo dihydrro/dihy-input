@@ -32,6 +32,12 @@ export class DihyInputComponent implements OnInit {
   ngOnInit() { }
 
 
+  get displayCancel(): boolean {
+    if (this._tokensSelected.length && this.multiple == 'true')
+      return true;
+    return false;
+  }
+
   addTokenfield(tokenfield: string, simpleAdd: boolean = true): void {
     if (!this.isSelected(tokenfield)) {
       if (this.multiple == 'false')
@@ -41,6 +47,11 @@ export class DihyInputComponent implements OnInit {
         this.emitSelectedTokens();
     } else if (!this.type)
       this.deleteTokenfield(tokenfield);
+  }
+
+  cancelFilter(): void {
+    this._tokensSelected = [];
+    this.emitSelectedTokens();
   }
 
   deleteTokenfield(tokenfield: string): void {
@@ -85,7 +96,8 @@ export class DihyInputComponent implements OnInit {
 
   textChange(change): void {
     change.srcElement.value.split(' ').forEach(token => {
-      this.addTokenfield(token, false);
+      if (token)
+        this.addTokenfield(token, false);
     });
     this.emitSelectedTokens();
     change.srcElement.value = "";

@@ -1,7 +1,8 @@
 .input-tokenfield {
-  max-height: 72px;
+  height: 30px;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-right: 42px;
 }
 .input-tokenfield > span {
   padding: 2px 10px 2px 10px;
@@ -68,4 +69,12 @@ i.fas.fa-times {
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+
+.cancel-filter {
+  position: absolute;
+  top: 5px;
+  right: 42px;
+  cursor: pointer;
+  z-index: 21;
 }
