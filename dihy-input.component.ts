@@ -6,115 +6,154 @@ import {
   Output
 } from '@angular/core';
 
+import { Options }  from './model/options';
+
 @Component({
-  selector: 'dihy-input',
-  templateUrl: './dihy-input.component.html',
-  styleUrls: ['./dihy-input.component.css']
+  'selector': 'dihy-input',
+  'templateUrl': './dihy-input.component.html',
+  'styleUrls': ['./dihy-input.component.css']
 })
 export class DihyInputComponent implements OnInit {
+  // base value for options
+  private _baseBackgroundColor: string = '#fcfcfc';
+  private _baseColorFocusIn: string = 'blue';
+  private _baseColorFocusOut: string = '#dcdcdc';
+  private _baseColorSelect: string = 'green';
+  private _baseColorText: string = 'black';
+  private _baseMultiple: string = 'true';
+  private _baseTextarea: boolean = false;
+  private _baseInputType: string = 'text';
+  // define input border color
+  private _inputBorderColor: string;
+  private _inputStyles;
+  // access object.keys into html
   private _objectKeys: Function = Object.keys;
-  private _textFocus: string = '#dcdcdc';
-  private _showOptions: boolean = false;
+  // display options div
+  private _showTokensPropose: boolean = false;
 
-  @Input() colorSelect: string = 'green';
-  @Input() inputFile: boolean = false;
+  // each of the Input here can be defined from the options Input below
+  @Input() options: Options;
+  @Input() backgroundColor: string;
+  // border color when the input is focus or not
+  @Input() colorFocusIn: string;
+  @Input() colorFocusOut: string;
+  // background color used for tokens selected in the options list
+  @Input() colorSelect: string;
+  @Input() colorText: string;
   @Input() label: string;
-  @Input() multiple: string = 'true';
+  // can we select multiple tokens? ('true' or 'false' as a string)
+  @Input() multiple: string;
   @Input() placeholder: string;
-  @Input() type: string;
-  @Input() tokenfields: any[];
+  // by default the input is a text one so tokens are seperate by space
+  // if you want to be able to take tokens with space we can use the textarea
+  // to seperate tokens with carriage return
+  // TODO: later on i want to catch the user input event and personalize the ux
+  @Input() textarea: boolean;
+  // each key represent a possible value the content of the key is emitted if specified
+  @Input() tokens: any[];
+  // specify the input type (file, number, text, ...)
+  @Input() inputType: string;
 
   @Output() tokensSelectedChange: EventEmitter<string[]> = new EventEmitter;
   private _tokensSelected: string[] = [];
 
-  constructor() { }
-
-  ngOnInit() { }
-
-
-  get displayCancel(): boolean {
-    if (this._tokensSelected.length && this.multiple == 'true')
-      return true;
-    return false;
+  constructor() {
+    this.backgroundColor = this._baseBackgroundColor;
+    this.colorFocusIn = this._baseColorFocusIn;
+    this.colorFocusOut = this._baseColorFocusOut;
+    this.colorSelect = this._baseColorSelect;
+    this.colorText = this._baseColorText;
+    this.multiple = this._baseMultiple;
+    this.textarea = this._baseTextarea;
+    this.inputType = this._baseInputType;
   }
 
-  addTokenfield(tokenfield: string, simpleAdd: boolean = true): void {
-    if (!this.isSelected(tokenfield)) {
-      if (this.multiple == 'false')
+  ngOnInit() {
+    this._inputStyles = {};
+    Object.keys(new Options()).forEach(option => {
+      if (this.options[option]) {
+        this[option] = this.options[option];
+      }
+    });
+    this._inputBorderColor = this.colorFocusOut;
+  }
+
+
+  addToken(token: string, simpleAdd: boolean = true): void {
+    if (!this.isSelected(token)) {
+      if (this.multiple === 'false') {
         this._tokensSelected = [];
-      this._tokensSelected.push(tokenfield);
-      if (simpleAdd)
+      }
+      this._tokensSelected.push(token);
+      if (simpleAdd) {
         this.emitSelectedTokens();
-    } else if (!this.type)
-      this.deleteTokenfield(tokenfield);
+      }
+    } else if (this.inputType === 'none') {
+      this.deleteToken(token);
+    }
   }
 
-  cancelFilter(): void {
-    this._tokensSelected = [];
-    this.emitSelectedTokens();
-  }
-
-  deleteTokenfield(tokenfield: string): void {
+  deleteToken(toDel: string): void {
     this._tokensSelected = this._tokensSelected.filter(token => {
-      return token == tokenfield ? false : true;
+      return token === toDel ? false : true;
     });
     this.emitSelectedTokens();
   }
 
   emitSelectedTokens(): void {
-    let selectedTokens = [];
+    const selectedTokens = [];
 
     this._tokensSelected.forEach(token => {
-      if (this.tokenfields)
-        selectedTokens.push(this.tokenfields[token]);
-      else
+      if (this.tokens) {
+        selectedTokens.push(this.tokens[token]);
+      } else {
         selectedTokens.push(token);
+      }
     });
     this.tokensSelectedChange.emit(selectedTokens);
   }
 
-  isSelected(tokenfield: string) {
-    var findToken = (selected) => {
-      return selected == tokenfield ? true : false
-    }
-    if (this._tokensSelected.find(findToken) == undefined)
+  isSelected(token: string): boolean {
+    const findToken = (selected) => {
+      return selected === token ? true : false;
+    };
+    if (this._tokensSelected.find(findToken) === undefined) {
       return false;
+    }
     return true;
   }
 
   isShownOptions() {
-    if (this.type)
+    if (this.inputType) {
       return false;
-    if (this._showOptions)
+    }
+    if (this._showTokensPropose) {
       return true;
+    }
     return false;
-  }
-
-  hideOptions(): void {
-    this._showOptions = false;
   }
 
   textChange(change): void {
     change.srcElement.value.split(' ').forEach(token => {
-      if (token)
-        this.addTokenfield(token, false);
+      this.addToken(token, false);
     });
     this.emitSelectedTokens();
-    change.srcElement.value = "";
+    change.srcElement.value = '';
   }
 
-  textFocusOut(): void {
-    this._textFocus = '#dcdcdc';
+  inputFocusOut(): void {
+    this._inputBorderColor = this.colorFocusOut;
   }
 
-  tokenfieldClick(event): void {
-    if (this.type == 'text') {
+  inputClick(event): void {
+    if (this.inputType === 'text') {
       event.srcElement.nextElementSibling.focus();
-      this._textFocus = 'blue';
-    } else if (this.tokenfields)
-      this._showOptions = !this._showOptions;
-    else
+      this._inputBorderColor = this.colorFocusIn;
+    } else if (this.tokens) {
+      this._showTokensPropose = !this._showTokensPropose;
+    } else {
       (<HTMLElement>document.querySelector('#fileInput')).click();
+    }
   }
 
 }
