@@ -1,13 +1,16 @@
 .input {
-  max-height: 72px;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 42px;
+  height: 100%;
 }
-.input > span {
+.input > span, .input > div.placeholder-textarea {
   padding: 2px 10px 2px 10px;
   margin: 2px 2px 2px 2px;
-  display: inline-block;
+}
+
+.placeholder-text {
+  float: left;
 }
 
 span.tokendfield {
@@ -16,6 +19,7 @@ span.tokendfield {
   border: #eaeaea 1px solid;
   background-color: #eaeaea;
   border-radius: 6px;
+  float: left;
 }
 span.tokendfield > span.icon {
   cursor: pointer;
@@ -25,11 +29,14 @@ i.fas.fa-times {
 }
 
 .textInput, .textInput:focus {
+  resize: none;
+  overflow: hidden;
   border: none;
   outline: none;
 }
 
 .select {
+  height: 100%;
   border: #dcdcdc 1px solid;
   border-radius: 6px;
   padding: 3px 3px 3px 3px;
@@ -57,7 +64,7 @@ i.fas.fa-times {
   left: 0;
   z-index: 20;
   position: absolute;
-  width: 100%;
+  width: 90%;
   height: 100%;
   cursor: pointer;
 }
@@ -69,4 +76,12 @@ i.fas.fa-times {
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+
+.cancel-filter {
+  position: absolute;
+  top: 5px;
+  right: 42px;
+  cursor: pointer;
+  z-index: 21;
 }

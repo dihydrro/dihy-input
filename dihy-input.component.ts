@@ -32,7 +32,7 @@ export class DihyInputComponent implements OnInit {
   private _showTokensPropose: boolean = false;
 
   // each of the Input here can be defined from the options Input below
-  @Input() options: Options;
+  @Input() options;
   @Input() backgroundColor: string;
   // border color when the input is focus or not
   @Input() colorFocusIn: string;
@@ -70,11 +70,13 @@ export class DihyInputComponent implements OnInit {
 
   ngOnInit() {
     this._inputStyles = {};
-    Object.keys(new Options()).forEach(option => {
-      if (this.options[option]) {
-        this[option] = this.options[option];
-      }
-    });
+    if (typeof(this.options) === 'object') {
+      Object.keys(new Options()).forEach(option => {
+        if (this.options[option]) {
+          this[option] = this.options[option];
+        }
+      });
+    }
     this._inputBorderColor = this.colorFocusOut;
   }
 
@@ -93,11 +95,29 @@ export class DihyInputComponent implements OnInit {
     }
   }
 
+  cancelFilter(): void {
+    this._tokensSelected = [];
+    this.emitSelectedTokens();
+  }
+
   deleteToken(toDel: string): void {
     this._tokensSelected = this._tokensSelected.filter(token => {
       return token === toDel ? false : true;
     });
     this.emitSelectedTokens();
+  }
+
+   displayCancel(inputType: string): boolean {
+    if (this.textarea && inputType !== 'textarea') {
+      return false;
+    }
+    if (!this.textarea && inputType !== 'text') {
+      return false;
+    }
+    if (this._tokensSelected.length && this.multiple === 'true') {
+      return true;
+    }
+    return false;
   }
 
   emitSelectedTokens(): void {
@@ -111,6 +131,21 @@ export class DihyInputComponent implements OnInit {
       }
     });
     this.tokensSelectedChange.emit(selectedTokens);
+  }
+
+  inputClick(event): void {
+    if (this.inputType === 'text') {
+      event.srcElement.nextElementSibling.focus();
+      this._inputBorderColor = this.colorFocusIn;
+    } else if (this.tokens) {
+      this._showTokensPropose = !this._showTokensPropose;
+    } else {
+      (<HTMLElement>document.querySelector('#fileInput')).click();
+    }
+  }
+
+  inputFocusOut(): void {
+    this._inputBorderColor = this.colorFocusOut;
   }
 
   isSelected(token: string): boolean {
@@ -133,27 +168,26 @@ export class DihyInputComponent implements OnInit {
     return false;
   }
 
+  showInputText(): boolean {
+    if (this.textarea) {
+      return false;
+    }
+    if (this.inputType === 'file' || this.inputType === 'none') {
+      return false;
+    }
+    return true;
+  }
+
   textChange(change): void {
-    change.srcElement.value.split(' ').forEach(token => {
-      this.addToken(token, false);
+    const splitSeparator: string = this.textarea ? '\n' : ' ';
+
+    change.srcElement.value.split(splitSeparator).forEach(token => {
+      token = token.trim();
+      if (token) {
+        this.addToken(token, false);
+      }
     });
     this.emitSelectedTokens();
     change.srcElement.value = '';
   }
-
-  inputFocusOut(): void {
-    this._inputBorderColor = this.colorFocusOut;
-  }
-
-  inputClick(event): void {
-    if (this.inputType === 'text') {
-      event.srcElement.nextElementSibling.focus();
-      this._inputBorderColor = this.colorFocusIn;
-    } else if (this.tokens) {
-      this._showTokensPropose = !this._showTokensPropose;
-    } else {
-      (<HTMLElement>document.querySelector('#fileInput')).click();
-    }
-  }
-
 }
