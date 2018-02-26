@@ -29,10 +29,14 @@ i.fas.fa-times {
 }
 
 .textInput, .textInput:focus {
+  background: inherit;
   resize: none;
   overflow: hidden;
   border: none;
   outline: none;
+}
+textarea.textInput {
+  width: 100%;
 }
 
 .select {

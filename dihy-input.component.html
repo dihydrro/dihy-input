@@ -29,8 +29,7 @@
     </span>
     <span class="input-click" (click)="inputClick($event)"></span>
     <textarea *ngIf="textarea"              class="textInput"
-              (change)="textChange($event)" (focusout)="inputFocusOut()">
-    </textarea>
+              (change)="textChange($event)" (focusout)="inputFocusOut()"></textarea>
     <input  *ngIf="showInputText()"         class="textInput"   [type]="inputType"
             (change)="textChange($event)"   (focusout)="inputFocusOut()" />
     <span *ngIf="_showTokensPropose" class="hide-options" (click)="_showTokensPropose = false">
