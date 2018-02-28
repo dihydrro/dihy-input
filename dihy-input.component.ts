@@ -135,7 +135,7 @@ export class DihyInputComponent implements OnInit {
 
   inputClick(event): void {
     if (this.inputType === 'text') {
-      event.srcElement.nextElementSibling.focus();
+      event.target.nextElementSibling.focus();
       this._inputBorderColor = this.colorFocusIn;
     } else if (this.tokens) {
       this._showTokensPropose = !this._showTokensPropose;
@@ -181,13 +181,13 @@ export class DihyInputComponent implements OnInit {
   textChange(change): void {
     const splitSeparator: string = this.textarea ? '\n' : ' ';
 
-    change.srcElement.value.split(splitSeparator).forEach(token => {
+    change.target.value.split(splitSeparator).forEach(token => {
       token = token.trim();
       if (token) {
         this.addToken(token, false);
       }
     });
     this.emitSelectedTokens();
-    change.srcElement.value = '';
+    change.target.value = '';
   }
 }
