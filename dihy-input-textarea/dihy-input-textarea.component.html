@@ -1,0 +1,14 @@
+<div class="placeholder-textarea">
+  {{ placeholder }}
+  <span *ngIf="value.length" class="cancel-filter" (click)="cancelInput()">
+    <i class="fas fa-times" aria-hidden="true"></i>
+  </span>
+  <hr />
+</div>
+<dihy-input-token *ngIf="token"         (tokensChange)="tokensChange($event)"
+                  [multiple]="multiple" [possibleTokens]="possibleTokens"
+                  [tokens]="value">
+</dihy-input-token>
+<textarea class="textInput" (change)="onChange($event)" (focusout)="inputFocusOut()"
+          [disabled]="disabled">
+</textarea>

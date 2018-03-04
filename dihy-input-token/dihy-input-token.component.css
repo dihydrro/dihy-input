@@ -1,0 +1,56 @@
+span.token-field, span.placeholder {
+  display: inline-block;
+  min-height: 26px;
+  margin: 4px 4px 4px 4px;
+  padding: 2px 4px 2px 4px;
+}
+
+span.token-field {
+  max-width: 100%;
+  z-index: 100;
+  border: black 1px solid;
+  background-color: #eaeaea;
+  border-radius: 6px;
+  position: relative;
+}
+
+span.token-field span.text {
+  max-width: calc(100% - 26px);
+  word-wrap: break-word;
+}
+
+span.token-field > span.icon {
+  margin-right: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+i.fas.fa-times {
+  margin-left: 4px;
+}
+
+.hide-possible {
+  position: fixed;
+  z-index: 25;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.possible-container {
+  max-height: 200px;
+  overflow-y: scroll;
+  padding-left: 10px;
+  cursor: pointer;
+  background-color: white;
+  border: #eaeaea 1px solid;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 100;
+  width: 87%;
+}
+
+.token-container {
+  padding-right: 42px;
+}

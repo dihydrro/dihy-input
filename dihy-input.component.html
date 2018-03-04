@@ -1,44 +1,38 @@
-<div class="label">
-  <ng-content select="[label]"></ng-content>
-  <div *ngIf="label">
-    {{ label }}
-  </div>
+<ng-content select="[label]"></ng-content>
+<div *ngIf="label" class="label">
+  {{ label }}
 </div>
-<div  [style.borderColor]="_inputBorderColor"   class="select"
-      [style.backgroundColor]="backgroundColor" [style.color]="colorText">
-  <input  *ngIf="inputType === 'file'"     class="fileInput"
-          (change)="onChange($event)" multiple
-          accept=".csv" type="file"   hidden />
-  <div class="input">
-    <div *ngIf="textarea" class="placeholder-textarea">
-      {{ placeholder }}
-      <span *ngIf="displayCancel('textarea')" class="cancel-filter" (click)="cancelFilter()">
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </span>
-      <hr />
-    </div>
-    <span *ngIf="!textarea" class="placeholder-text">{{ placeholder }}</span>
-    <span *ngIf="displayCancel('text')" class="cancel-filter" (click)="cancelFilter()">
-      <i class="fas fa-times" aria-hidden="true"></i>
-    </span>
-    <span *ngFor="let token of _tokensSelected" class="tokendfield">
-      <span class="text">{{ token }}</span>
-      <span (click)="deleteToken(token)" class="icon">
-        <i class="fas fa-times" aria-hidden="true"></i>
-      </span>
-    </span>
-    <span class="input-click" (click)="inputClick($event)"></span>
-    <textarea *ngIf="textarea"              class="textInput"
-              (change)="textChange($event)" (focusout)="inputFocusOut()"></textarea>
-    <input  *ngIf="showInputText()"         class="textInput"   [type]="inputType"
-            (change)="textChange($event)"   (focusout)="inputFocusOut()" />
-    <span *ngIf="_showTokensPropose" class="hide-options" (click)="_showTokensPropose = false">
-    </span>
+<div  [ngSwitch]="inputType"                  class="input-container"
+      [style.borderColor]="inputBorderColor"  [style.color]="colorText"
+      [style.backgroundColor]="inputBackgroundColor">
+  <div *ngSwitchCase="'file'">
+    <dihy-input-file  [(inputClick)]="inputClick"       [multiple]="multiple"
+                      (valueChange)="onChange($event)"  [accept]="accept"
+                      [placeholder]="placeholder">
+    </dihy-input-file>
   </div>
-  <div *ngIf="_showTokensPropose" class="dihy-options">
-    <div  *ngFor="let token of _objectKeys(tokens)"   (click)="addToken(token)"
-          [style.backgroundColor]="isSelected(token) ? colorSelect : 'inherit'">
-      {{ token }}
-    </div>
+  <div *ngSwitchCase="'textarea'">
+    <dihy-input-textarea  (valueChange)="onChange($event)"  [(inputClick)]="inputClick"
+                          [multiple]="multiple"             [placeholder]="placeholder"
+                          [split]="split"                   [value]="value"
+                          [possibleTokens]="possibleTokens" [token]="token"
+                          [disabled]="disabled">
+    </dihy-input-textarea>
   </div>
+  <div *ngSwitchCase="'text'">
+    <dihy-input-text  (valueChange)="onChange($event)"  [(inputClick)]="inputClick"
+                      [multiple]="multiple"             [placeholder]="placeholder"
+                      [split]="split"                   [value]="value"
+                      [possibleTokens]="possibleTokens" [token]="token"
+                      [disabled]="disabled">
+    </dihy-input-text>
+  </div>
+  <div *ngSwitchCase="'token'">
+    <dihy-input-token (valueChange)="onChange($event)"  [(inputClick)]="inputClick"
+                      [multiple]="multiple"             [placeholder]="placeholder"
+                      [possibleTokens]="possibleTokens" [tokens]="value"
+                      [inputType]="inputType">
+    </dihy-input-token>
+  </div>
+  <span class="input-click" (click)="inputClick = !inputClick"></span>
 </div>

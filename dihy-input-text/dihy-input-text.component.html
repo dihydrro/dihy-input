@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="placeholder col-3">
+    {{ placeholder }}
+  </div>
+  <dihy-input-token *ngIf="token"         (tokensChange)="tokensChange($event)"
+                    [multiple]="multiple" [possibleTokens]="possibleTokens"
+                    [tokens]="value">
+  </dihy-input-token>
+  <input  class="textInput col-8"       type="text" (change)="onChange($event)"
+          (focusout)="inputFocusOut()"  [disabled]="disabled" />
+</div>

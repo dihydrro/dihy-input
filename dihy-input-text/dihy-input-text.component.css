@@ -1,0 +1,8 @@
+.placeholder {
+  float: left;
+  margin-right: 10px;
+}
+
+input {
+  word-wrap: break-word;
+}

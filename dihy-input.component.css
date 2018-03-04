@@ -1,91 +1,38 @@
-.input {
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 42px;
-  height: 100%;
-}
-.input > span, .input > div.placeholder-textarea {
-  padding: 2px 10px 2px 10px;
-  margin: 2px 2px 2px 2px;
-}
-
-.placeholder-text {
-  float: left;
-}
-
-span.tokendfield {
-  z-index: 100;
-  position: relative;
-  border: #eaeaea 1px solid;
-  background-color: #eaeaea;
-  border-radius: 6px;
-  float: left;
-}
-span.tokendfield > span.icon {
-  cursor: pointer;
-}
-i.fas.fa-times {
-  margin-left: 4px;
-}
-
-.textInput, .textInput:focus {
-  background: inherit;
-  resize: none;
-  overflow: hidden;
-  border: none;
-  outline: none;
-}
-textarea.textInput {
-  width: 100%;
-}
-
-.select {
-  height: 100%;
-  border: #dcdcdc 1px solid;
-  border-radius: 6px;
-  padding: 3px 3px 3px 3px;
-}
-
-.select.focus {
-  border-color: blue;
-}
-
-.dihy-options {
-  max-height: 200px;
-  overflow-y: scroll;
-  padding-left: 10px;
-  cursor: pointer;
-  background-color: white;
-  border: #eaeaea 1px solid;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 100;
-  width: 87%;
-}
-
-.input-click {
-  top: 0;
-  left: 0;
-  z-index: 20;
-  position: absolute;
-  width: 90%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.hide-options {
-  position: fixed;
-  z-index: 25;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
 .cancel-filter {
   position: absolute;
   top: 5px;
   right: 42px;
   cursor: pointer;
   z-index: 21;
+}
+
+.input-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  border: #dcdcdc 1px solid;
+  border-radius: 6px;
+  padding: 4px 4px 4px 12px;
+}
+
+.input-container > div {
+  height: 100%;
+}
+
+.input-click {
+  top: 0;
+  left: 20px;
+  z-index: 20;
+  position: absolute;
+  width: 75%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.textInput, .textInput:focus {
+  resize: none;
+  overflow: hidden;
+  border: none;
+  outline: none;
+  background: none;
 }
