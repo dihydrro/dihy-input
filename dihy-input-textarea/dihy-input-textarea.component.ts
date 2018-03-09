@@ -91,7 +91,6 @@ export class DihyInputTextareaComponent implements OnInit {
   }
 
   onChange(change): void {
-    console.log(change);
     if (this.token) {
       change.target.value.split(this.split).forEach(val => {
         val = val.trim();
