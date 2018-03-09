@@ -17,7 +17,7 @@ export class DihyInputTokenComponent {
   private _baseTokens: string[] = [];
   private _objectKeys = Object.keys;
 
-  @Input() colorSelect: string = null;
+  @Input() colorSelected: string = null;
   @Input() inputType: string;
   @Input() multiple: boolean = null;
   @Input() placeholder: string;

@@ -12,7 +12,7 @@
 </div>
 <div *ngIf="showPossibleTokens" class="possible-container">
   <div  *ngFor="let token of _objectKeys(possibleTokens)"  (click)="addToken(token)"
-        [style.backgroundColor]="isSelected(token) ? colorSelect : 'inherit'">
+        [style.backgroundColor]="isSelected(token) ? colorSelected : 'inherit'">
     {{ token }}
   </div>
 </div>
