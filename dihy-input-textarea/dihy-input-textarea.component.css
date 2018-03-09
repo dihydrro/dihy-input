@@ -2,3 +2,7 @@ textarea {
   width: 75%;
   height: 60%;
 }
+
+hr {
+  margin: 4px auto 4px auto;
+}
