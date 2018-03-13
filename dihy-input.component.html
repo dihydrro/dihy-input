@@ -34,5 +34,5 @@
                       [inputType]="inputType"           [colorSelected]="colorSelected">
     </dihy-input-token>
   </div>
-  <span class="input-click" (click)="inputClick = !inputClick"></span>
+  <span *ngIf="!inputClick" class="input-click" (click)="inputClick = !inputClick"></span>
 </div>
