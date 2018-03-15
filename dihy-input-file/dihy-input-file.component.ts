@@ -23,7 +23,7 @@ export class DihyInputFileComponent {
   @Output() valueChange: EventEmitter<any[]> = new EventEmitter();
 
   private _inputClick: boolean = false;
-  @Output() inputClickChange: EventEmitter<boolean> = new EventEmitter();
+  @Output() inputClickChange: EventEmitter<boolean> = new EventEmitter(true);
   @Input() get inputClick(): boolean {
     return this._inputClick;
   }
@@ -31,36 +31,36 @@ export class DihyInputFileComponent {
     if (bool === true) {
       (<HTMLElement>document.querySelector('#fileInput')).click();
     }
-    this._inputClick = bool;
+    this._inputClick = false;
     this.inputClickChange.emit(this._inputClick);
+  }
+  @Input() set givenFile(files: any[]) {
+    this._fileService.unsetFiles();
+    this._fileService.addFiles(files);
+    this.tokens = this._fileService.filesname;
   }
 
   tokens: string[] = [];
 
 
-  private _deleteDuplicateFile(): void {
-    this._fileService.fileList.forEach(file1 => {
-      let found: boolean = false;
+  addNewFiles(files): void {
+    this._fileService.addFileList(files);
+    this.tokens = this._fileService.filesname;
+    this.valueChange.emit(this._fileService.fileList);
+  }
 
-      this._fileService.fileList.forEach(file2 => {
-        if (file1.name === file2.name) {
-          if (found === true) {
-            this._fileService.deleteFileName(file1.name);
-            return ;
-          }
-          found = true;
-        }
-      });
-    });
+  allowDrop(event): void {
+    event.preventDefault();
   }
 
   onChange(change): void {
-    this._fileService.addFileList(change.target.files);
-    this._deleteDuplicateFile();
-    this.tokens = this._fileService.filesname;
-    this.valueChange.emit(this._fileService.fileList);
-    this.inputClick = false;
+    this.addNewFiles(change.target.files);
     change.target.value = '';
+  }
+
+  onDrop(event): void {
+    event.preventDefault();
+    this.addNewFiles(event.dataTransfer.files);
   }
 
   tokensChange(change: string[]): void {
@@ -77,5 +77,6 @@ export class DihyInputFileComponent {
         this._fileService.deleteFileName(file.name);
       }
     });
+    this.valueChange.emit(this._fileService.fileList);
   }
 }

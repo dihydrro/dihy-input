@@ -8,7 +8,7 @@
   <div *ngSwitchCase="'file'">
     <dihy-input-file  [(inputClick)]="inputClick"       [multiple]="multiple"
                       (valueChange)="onChange($event)"  [accept]="accept"
-                      [placeholder]="placeholder">
+                      [placeholder]="placeholder"       [givenFile]="value">
     </dihy-input-file>
   </div>
   <div *ngSwitchCase="'textarea'">

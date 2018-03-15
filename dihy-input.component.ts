@@ -43,7 +43,8 @@ export class DihyInputComponent implements OnInit {
   @Output() valueChange: EventEmitter<string[]> = new EventEmitter;
 
   private _inputClick: boolean = false;
-  get inputClick(): boolean {
+  @Output() inputClickChange: EventEmitter<boolean> = new EventEmitter();
+  @Input() get inputClick(): boolean {
     return this._inputClick;
   }
   set inputClick(bool: boolean) {
@@ -56,6 +57,7 @@ export class DihyInputComponent implements OnInit {
       this.inputBorderColor = this.colorFocusIn;
     }
     this._inputClick = bool;
+    this.inputClickChange.emit(this._inputClick);
   }
 
   inputBorderColor: string;

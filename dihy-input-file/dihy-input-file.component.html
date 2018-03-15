@@ -1,5 +1,6 @@
 <input  id="fileInput"        type="file"       hidden
         multiple="multiple"   accept="accept"   (change)="onChange($event)" />
 <dihy-input-token (tokensChange)="tokensChange($event)" [tokens]="tokens"
-                  [placeholder]="placeholder"           [multiple]="multiple">
+                  [placeholder]="placeholder"           [multiple]="multiple"
+                  (dragover)="allowDrop($event)"        (drop)="onDrop($event)" >
 </dihy-input-token>

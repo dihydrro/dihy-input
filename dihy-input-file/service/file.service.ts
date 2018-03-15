@@ -21,6 +21,13 @@ export class FileService {
     }
   }
 
+  addFiles(files: any[]): void {
+    files.forEach(file => {
+      this.fileList = this.filterFileName(file.name);
+      this.fileList.push(file);
+    });
+  }
+
   deleteFileName(name: string): void {
     this.fileList = this.filterFileName(name);
   }
@@ -32,5 +39,9 @@ export class FileService {
       }
       return true;
     });
+  }
+
+  unsetFiles(): void {
+    this.fileList = [];
   }
 }
