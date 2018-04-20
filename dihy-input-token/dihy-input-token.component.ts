@@ -73,12 +73,12 @@ export class DihyInputTokenComponent {
     } else {
       this.tokens.push(token);
     }
-    this.tokensChange.emit(this.tokens);
+    this.tokensChange.emit(this.fmtEmitTokens());
   }
 
   deleteToken(token: string, emit: boolean = true): void {
     this.tokens = this.filterToken(token);
-    this.tokensChange.emit(this.tokens);
+    this.tokensChange.emit(this.fmtEmitTokens());
   }
 
   filterToken(filter: string): string[] {
@@ -88,6 +88,23 @@ export class DihyInputTokenComponent {
       }
       return true;
     });
+  }
+
+  fmtEmitTokens(): any[] {
+    const fmtTokens: any[] = [];
+    let tmp;
+
+    if (this.possibleTokens) {
+      tmp = (token) => {
+        if (this.possibleTokens[token] !== undefined) {
+          fmtTokens.push(this.possibleTokens[token]);
+        }
+      };
+    } else {
+      tmp = (token) => { fmtTokens.push(token); };
+    }
+    this.tokens.forEach(tmp);
+    return fmtTokens;
   }
 
   isSelected(isSel: string): boolean {

@@ -28,7 +28,7 @@
     </dihy-input-text>
   </div>
   <div *ngSwitchCase="'token'">
-    <dihy-input-token (valueChange)="onChange($event)"  [(inputClick)]="inputClick"
+    <dihy-input-token (tokensChange)="onChange($event)" [(inputClick)]="inputClick"
                       [multiple]="multiple"             [placeholder]="placeholder"
                       [possibleTokens]="possibleTokens" [tokens]="value"
                       [inputType]="inputType"           [colorSelected]="colorSelected">
