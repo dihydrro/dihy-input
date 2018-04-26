@@ -15,6 +15,7 @@ import { FileService } from './service/file.service';
 })
 export class DihyInputFileComponent {
   private _fileService: FileService = new FileService();
+  private _inputID: string = this._getNewInputID();
 
   @Input() accept: string = '*';
   @Input() multiple: boolean = true;
@@ -29,7 +30,7 @@ export class DihyInputFileComponent {
   }
   set inputClick(bool: boolean) {
     if (bool === true) {
-      (<HTMLElement>document.querySelector('#fileInput')).click();
+      (<HTMLElement>document.querySelector('#' + this._inputID)).click();
     }
     this._inputClick = false;
     this.inputClickChange.emit(this._inputClick);
@@ -42,6 +43,15 @@ export class DihyInputFileComponent {
 
   tokens: string[] = [];
 
+
+  private _getNewInputID(): string {
+    let index: number = 1;
+
+    while (document.querySelector('#inputFile-' + index) !== null) {
+      index++;
+    }
+    return 'inputFile-' + index;
+  }
 
   addNewFiles(files): void {
     this._fileService.addFileList(files);
