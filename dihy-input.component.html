@@ -34,5 +34,11 @@
                       [inputType]="inputType"           [colorSelected]="colorSelected">
     </dihy-input-token>
   </div>
+  <div *ngSwitchCase="'boolean'">
+    <dihy-input-boolean (valueChange)="onChange($event)"  [placeholder]="placeholder"
+                        [disabled]="disabled"             [value]="value"
+                        [(inputClick)]="inputClick">
+    </dihy-input-boolean>
+  </div>
   <span *ngIf="!inputClick" class="input-click" (click)="inputClick = !inputClick"></span>
 </div>

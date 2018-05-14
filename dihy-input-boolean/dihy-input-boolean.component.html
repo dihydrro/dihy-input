@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="placeholder col-3">
+    {{ placeholder }}
+  </div>
+  <input  class="boolInput col-8" type="checkbox" (change)="onChange(event)"
+          [disabled]="disabled"   [value]="value" />
+</div>
