@@ -20,8 +20,10 @@ export class DihyInputBooleanComponent implements OnInit {
   @Input() placeholder: string;
   @Input() value: boolean = null;
 
+  @Output() valueChange: EventEmitter<boolean> = new EventEmitter();
+
   private _inputClick: boolean = false;
-  @Output() inputClickChange: EventEmitter<boolean> = new EventEmitter();
+  @Output() inputClickChange: EventEmitter<boolean> = new EventEmitter(true);
   @Input() get inputClick(): boolean {
     return this._inputClick;
   }
@@ -29,7 +31,7 @@ export class DihyInputBooleanComponent implements OnInit {
     if (bool === true) {
       this._myEl.nativeElement.querySelector('input').click();
     }
-    this._inputClick = bool;
+    this._inputClick = false;
     this.inputClickChange.emit(this._inputClick);
   }
 
@@ -52,5 +54,10 @@ export class DihyInputBooleanComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  onChange(change): void {
+    this.value = change.target.checked;
+    this.valueChange.emit(this.value);
   }
 }

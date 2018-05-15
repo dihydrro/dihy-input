@@ -2,6 +2,14 @@
   <div class="placeholder col-3">
     {{ placeholder }}
   </div>
-  <input  class="boolInput col-8" type="checkbox" (change)="onChange(event)"
-          [disabled]="disabled"   [value]="value" />
+  <span class="input-icon col-8">
+    <span [style.display]="value ? 'initial' : 'none'">
+      <i class="fas fa-toggle-on light fa-2x" aria-hidden="true"></i>
+    </span>
+    <span [style.display]="value ? 'none' : 'initial'">
+      <i class="fas fa-toggle-on fa-2x" data-fa-transform="rotate-180" aria-hidden="true"></i>
+    </span>
+  </span>
+  <input  class="boolInput"     type="checkbox"   (change)="onChange($event)"
+          [disabled]="disabled" [checked]="value" hidden />
 </div>
