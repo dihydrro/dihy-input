@@ -31,6 +31,8 @@ export class DihyInputComponent implements OnInit {
   @Input() disabled: boolean = null;
   @Input() inputType: string = null;
   @Input() label: string = null;
+  @Input() max: number = null;
+  @Input() min: number = null;
   @Input() multiple: boolean = null;
   @Input() placeholder: string = null;
   @Input() possibleTokens: string[] = null;

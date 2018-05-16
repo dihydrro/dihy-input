@@ -5,6 +5,7 @@ import { FormsModule }  from '@angular/forms';
 import { DihyInputComponent }         from './dihy-input.component';
 import { DihyInputBooleanComponent }  from './dihy-input-boolean/dihy-input-boolean.component';
 import { DihyInputFileComponent }     from './dihy-input-file/dihy-input-file.component';
+import { DihyInputNumberComponent }   from './dihy-input-number/dihy-input-number.component';
 import { DihyInputTextComponent }     from './dihy-input-text/dihy-input-text.component';
 import { DihyInputTextareaComponent } from './dihy-input-textarea/dihy-input-textarea.component';
 import { DihyInputTokenComponent }    from './dihy-input-token/dihy-input-token.component';
@@ -18,6 +19,7 @@ import { DihyInputTokenComponent }    from './dihy-input-token/dihy-input-token.
     DihyInputComponent,
     DihyInputBooleanComponent,
     DihyInputFileComponent,
+    DihyInputNumberComponent,
     DihyInputTextComponent,
     DihyInputTextareaComponent,
     DihyInputTokenComponent

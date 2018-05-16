@@ -40,5 +40,12 @@
                         [(inputClick)]="inputClick">
     </dihy-input-boolean>
   </div>
+  <div *ngSwitchCase="'number'">
+    <dihy-input-number  (valueChange)="onChange($event)"  [placeholder]="placeholder"
+                        [disabled]="disabled"             [value]="value"
+                        [(inputClick)]="inputClick"       [minVal]="min"
+                        [maxVal]="max">
+    </dihy-input-number>
+  </div>
   <span *ngIf="!inputClick" class="input-click" (click)="inputClick = !inputClick"></span>
 </div>

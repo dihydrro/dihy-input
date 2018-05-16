@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="placeholder col-3">
+    {{ placeholder }}
+  </div>
+  <div class="col-8">
+    <span class="icon-container"  (click)="changeValue(false)" (mousedown)="mouseDown(false)"
+          (mouseup)="mouseUp()"   (mouseleave)="mouseUp()">
+      <i class="fas fa-chevron-left fa-lg"></i>
+    </span>
+    <input  class="numberInput col-6"   type="number"   (change)="onChange($event)"
+            [disabled]="disabled"       [min]="minVal"  (focusout)="inputFocusOut()"
+            [max]="maxVal"              [value]="value" />
+    <span class="icon-container"  (click)="changeValue(true)" (mousedown)="mouseDown(true)"
+          (mouseup)="mouseUp()"   (mouseleave)="mouseUp()">
+      <i class="fas fa-chevron-right fa-lg"></i>
+    </span>
+  </div>
+</div>
