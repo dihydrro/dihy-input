@@ -29,6 +29,11 @@ export class DihyInputComponent implements OnInit {
   @Input() colorSelected: string = null;
   @Input() colorText: string = null;
   @Input() disabled: boolean = null;
+  private _inputBorderColor: string = null;
+  @Input() set inputBorderColor(color: string) {
+    this._inputBorderColor = color;
+    this.borderColor = color;
+  }
   @Input() inputType: string = null;
   @Input() label: string = null;
   @Input() max: number = null;
@@ -54,15 +59,15 @@ export class DihyInputComponent implements OnInit {
       return ;
     }
     if (bool === false) {
-      this.inputBorderColor = this.colorFocusOut;
+      this.borderColor = this._inputBorderColor || this.colorFocusOut;
     } else {
-      this.inputBorderColor = this.colorFocusIn;
+      this.borderColor = this._inputBorderColor || this.colorFocusIn;
     }
     this._inputClick = bool;
     this.inputClickChange.emit(this._inputClick);
   }
 
-  inputBorderColor: string;
+  borderColor: string;
   inputBackgroundColor: string;
 
 

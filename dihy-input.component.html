@@ -3,7 +3,7 @@
   {{ label }}
 </div>
 <div  [ngSwitch]="inputType"                  class="input-container"
-      [style.borderColor]="inputBorderColor"  [style.color]="colorText"
+      [style.borderColor]="borderColor"  [style.color]="colorText"
       [style.backgroundColor]="inputBackgroundColor">
   <div *ngSwitchCase="'file'">
     <dihy-input-file  [(inputClick)]="inputClick"       [multiple]="multiple"

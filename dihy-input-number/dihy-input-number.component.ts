@@ -63,9 +63,9 @@ export class DihyInputNumberComponent implements OnInit {
 
   checkNewValue(): void {
     if (this.value < this.minVal) {
-      this.value = this.minVal;
+      this.value = Number(this.minVal);
     } else if (this.value > this.maxVal) {
-      this.value = this.maxVal;
+      this.value = Number(this.maxVal);
     }
   }
 
@@ -80,6 +80,7 @@ export class DihyInputNumberComponent implements OnInit {
   }
 
   mouseDown(upper: boolean): void {
+    this.inputClick = true;
     if (this._timeoutHandler) {
       clearTimeout(this._timeoutHandler);
     }
@@ -89,6 +90,7 @@ export class DihyInputNumberComponent implements OnInit {
   }
 
   mouseUp(): void {
+    this.inputFocusOut();
     clearTimeout(this._timeoutHandler);
     this._timeoutHandler = null;
   }
