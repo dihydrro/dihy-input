@@ -83,7 +83,7 @@ export class DihyInputComponent implements OnInit {
     this._setIfUnset('colorFocusOut', this._baseColorFocusOut);
     this._setIfUnset('colorSelected', this._baseColorSelected);
     this._setIfUnset('colorText', this._baseColorText);
-    this.inputBorderColor = this.colorFocusOut;
+    this._setIfUnset('inputBorderColor', this.colorFocusOut);
     if (this.disabled) {
       this.inputBackgroundColor = this.backgroundDisabled;
     } else {
